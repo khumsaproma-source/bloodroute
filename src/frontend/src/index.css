@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Bundled Latin fonts --- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+/*
+ * BloodRoute — "Clinical Calm"
+ * Crimson (blood/urgency) + deep slate-teal (trust/calm) on a cool neutral.
+ * Thai glyphs render via "Noto Sans Thai" (loaded in index.html);
+ * bundled Space Grotesk / Figtree / JetBrains Mono cover Latin + numerals.
+ */
+
+:root {
+  --background: 0.98 0.006 240;
+  --foreground: 0.22 0.02 255;
+  --card: 1 0.002 240;
+  --card-foreground: 0.22 0.02 255;
+  --popover: 1 0.002 240;
+  --popover-foreground: 0.22 0.02 255;
+  --primary: 0.5 0.2 22;
+  --primary-foreground: 0.98 0.008 22;
+  --secondary: 0.94 0.014 235;
+  --secondary-foreground: 0.3 0.03 245;
+  --muted: 0.95 0.01 240;
+  --muted-foreground: 0.52 0.02 245;
+  --accent: 0.6 0.11 195;
+  --accent-foreground: 0.16 0.03 200;
+  --destructive: 0.52 0.22 25;
+  --destructive-foreground: 0.98 0.008 25;
+  --success: 0.58 0.14 155;
+  --success-foreground: 0.98 0.008 155;
+  --warning: 0.72 0.15 78;
+  --warning-foreground: 0.2 0.03 78;
+  --border: 0.9 0.012 240;
+  --input: 0.9 0.012 240;
+  --ring: 0.5 0.2 22;
+  --chart-1: 0.55 0.2 22;
+  --chart-2: 0.6 0.11 195;
+  --chart-3: 0.45 0.09 250;
+  --chart-4: 0.58 0.14 155;
+  --chart-5: 0.72 0.15 78;
+  --sidebar: 0.96 0.008 240;
+  --sidebar-foreground: 0.22 0.02 255;
+  --sidebar-primary: 0.5 0.2 22;
+  --sidebar-primary-foreground: 0.98 0.008 22;
+  --sidebar-accent: 0.92 0.014 235;
+  --sidebar-accent-foreground: 0.3 0.03 245;
+  --sidebar-border: 0.9 0.012 240;
+  --sidebar-ring: 0.5 0.2 22;
+
+  --font-display: "Space Grotesk", "Noto Sans Thai", sans-serif;
+  --font-body: "Figtree", "Noto Sans Thai", sans-serif;
+  --font-mono: "JetBrains Mono", "Noto Sans Thai", monospace;
+
+  --gradient-primary: linear-gradient(
+    135deg,
+    oklch(0.5 0.2 22) 0%,
+    oklch(0.44 0.19 12) 100%
+  );
+  --gradient-subtle: linear-gradient(
+    180deg,
+    oklch(0.98 0.006 240) 0%,
+    oklch(0.95 0.01 240) 100%
+  );
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --radius: 0.75rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: oklch(0.22 0.02 255);
+  --shadow-2xs: 0 1px 2px 0px oklch(0.22 0.02 255 / 0.05);
+  --shadow-xs: 0 1px 3px 0px oklch(0.22 0.02 255 / 0.06);
+  --shadow-sm: 0 1px 3px 0px oklch(0.22 0.02 255 / 0.08), 0 1px 2px -1px
+    oklch(0.22 0.02 255 / 0.08);
+  --shadow: 0 2px 6px -1px oklch(0.22 0.02 255 / 0.1), 0 1px 3px -1px
+    oklch(0.22 0.02 255 / 0.08);
+  --shadow-md: 0 4px 12px -2px oklch(0.22 0.02 255 / 0.12), 0 2px 6px -2px
+    oklch(0.22 0.02 255 / 0.08);
+  --shadow-lg: 0 12px 28px -6px oklch(0.22 0.02 255 / 0.16), 0 4px 10px -4px
+    oklch(0.22 0.02 255 / 0.1);
+  --shadow-xl: 0 20px 40px -12px oklch(0.22 0.02 255 / 0.2);
+  --shadow-2xl: 0 28px 60px -16px oklch(0.22 0.02 255 / 0.28);
+  --shadow-elevated: 0 8px 24px -6px oklch(0.22 0.02 255 / 0.14);
+  --shadow-crimson: 0 10px 30px -8px oklch(0.5 0.2 22 / 0.35);
+
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: 0.17 0.018 250;
+  --foreground: 0.94 0.008 240;
+  --card: 0.21 0.02 250;
+  --card-foreground: 0.94 0.008 240;
+  --popover: 0.21 0.02 250;
+  --popover-foreground: 0.94 0.008 240;
+  --primary: 0.62 0.2 22;
+  --primary-foreground: 0.16 0.02 22;
+  --secondary: 0.27 0.025 245;
+  --secondary-foreground: 0.88 0.01 240;
+  --muted: 0.25 0.022 248;
+  --muted-foreground: 0.68 0.015 240;
+  --accent: 0.68 0.12 195;
+  --accent-foreground: 0.16 0.03 200;
+  --destructive: 0.62 0.21 25;
+  --destructive-foreground: 0.16 0.02 25;
+  --success: 0.68 0.15 155;
+  --success-foreground: 0.16 0.02 155;
+  --warning: 0.78 0.15 80;
+  --warning-foreground: 0.18 0.03 80;
+  --border: 0.3 0.025 248;
+  --input: 0.3 0.025 248;
+  --ring: 0.62 0.2 22;
+  --chart-1: 0.68 0.2 22;
+  --chart-2: 0.68 0.12 195;
+  --chart-3: 0.6 0.1 250;
+  --chart-4: 0.68 0.15 155;
+  --chart-5: 0.78 0.15 80;
+  --sidebar: 0.19 0.02 250;
+  --sidebar-foreground: 0.94 0.008 240;
+  --sidebar-primary: 0.62 0.2 22;
+  --sidebar-primary-foreground: 0.16 0.02 22;
+  --sidebar-accent: 0.27 0.025 245;
+  --sidebar-accent-foreground: 0.88 0.01 240;
+  --sidebar-border: 0.3 0.025 248;
+  --sidebar-ring: 0.62 0.2 22;
+
+  --font-display: "Space Grotesk", "Noto Sans Thai", sans-serif;
+  --font-body: "Figtree", "Noto Sans Thai", sans-serif;
+  --font-mono: "JetBrains Mono", "Noto Sans Thai", monospace;
+
+  --gradient-primary: linear-gradient(
+    135deg,
+    oklch(0.62 0.2 22) 0%,
+    oklch(0.56 0.19 12) 100%
+  );
+  --gradient-subtle: linear-gradient(
+    180deg,
+    oklch(0.17 0.018 250) 0%,
+    oklch(0.21 0.02 250) 100%
+  );
+  --shadow-elevated: 0 8px 24px -6px oklch(0 0 0 / 0.4);
+  --shadow-crimson: 0 10px 30px -8px oklch(0.62 0.2 22 / 0.4);
+}
+
+@theme {
+  --color-background: oklch(var(--background));
+  --color-foreground: oklch(var(--foreground));
+  --color-card: oklch(var(--card));
+  --color-card-foreground: oklch(var(--card-foreground));
+  --color-popover: oklch(var(--popover));
+  --color-popover-foreground: oklch(var(--popover-foreground));
+  --color-primary: oklch(var(--primary));
+  --color-primary-foreground: oklch(var(--primary-foreground));
+  --color-secondary: oklch(var(--secondary));
+  --color-secondary-foreground: oklch(var(--secondary-foreground));
+  --color-muted: oklch(var(--muted));
+  --color-muted-foreground: oklch(var(--muted-foreground));
+  --color-accent: oklch(var(--accent));
+  --color-accent-foreground: oklch(var(--accent-foreground));
+  --color-destructive: oklch(var(--destructive));
+  --color-destructive-foreground: oklch(var(--destructive-foreground));
+  --color-success: oklch(var(--success));
+  --color-warning: oklch(var(--warning));
+  --color-border: oklch(var(--border));
+  --color-input: oklch(var(--input));
+  --color-ring: oklch(var(--ring));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  code,
+  kbd,
+  .tabular {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .shadow-crimson {
+    box-shadow: var(--shadow-crimson);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Ensure dialog appears above Leaflet map */
+[data-slot="dialog-overlay"] {
+  z-index: 9998 !important;
+}
+
+[data-slot="dialog-content"] {
+  z-index: 9999 !important;
+}

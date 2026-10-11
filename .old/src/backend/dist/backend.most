@@ -1,0 +1,183 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type BloodGroup__526126019 =
+  {#ABNeg; #ABPos; #ANeg; #APos; #BNeg; #BPos; #ONeg; #OPos};
+type BloodGroup__587378985 =
+  {#ABNeg; #ABPos; #ANeg; #APos; #BNeg; #BPos; #ONeg; #OPos};
+type BloodRequest__623859591 =
+  {
+    bloodGroup : BloodGroup__526126019;
+    createdAt : Nat;
+    distanceMeters : Nat;
+    durationSeconds : Nat;
+    geometry : Text;
+    hospitalId : Text;
+    hospitalName : Text;
+    id : Nat;
+    originLat : Float;
+    originLng : Float;
+    originName : Text;
+    status : RequestStatus__1004875532;
+    units : Nat;
+    updatedAt : Nat
+  };
+type BloodRequest__734691164 =
+  {
+    bloodGroup : BloodGroup__587378985;
+    createdAt : Timestamp__301639476;
+    distanceMeters : Nat;
+    durationSeconds : Nat;
+    geometry : Text;
+    hospitalId : Text;
+    hospitalName : Text;
+    id : Nat;
+    originLat : Float;
+    originLng : Float;
+    originName : Text;
+    status : RequestStatus__211161413;
+    units : Nat;
+    updatedAt : Timestamp__301639476
+  };
+type BloodStock__502182170 =
+  {bloodGroup : BloodGroup__587378985; units : Nat};
+type BloodStock__829049715 =
+  {bloodGroup : BloodGroup__526126019; units : Nat};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type Hospital__115818847 =
+  {
+    address : Text;
+    id : Text;
+    lat : Float;
+    lng : Float;
+    name : Text;
+    stock : [BloodStock__502182170]
+  };
+type Hospital__444406693 =
+  {
+    address : Text;
+    id : Text;
+    lat : Float;
+    lng : Float;
+    name : Text;
+    stock : [BloodStock__829049715]
+  };
+type Int__616954475 = Int;
+type Int__789852381 = Int__616954475;
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type LocationType__46982725 = {#Cafe; #CoworkingSpace; #Library};
+type Location__128901279 =
+  {
+    address : ?Text;
+    lat : Float;
+    lng : Float;
+    locationType : LocationType__46982725;
+    name : Text;
+    osmNodeId : Text;
+    ratings : [Rating__1001775987]
+  };
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__705149831 =
+  {
+    accessControlState : AccessControlState__201339279;
+    hospitals : Map__230067015<Text, Hospital__444406693>;
+    requests : Map__230067015<Nat, BloodRequest__623859591>;
+    state : {var nextRequestId : Nat};
+    userProfiles : Map__230067015<Principal, Profile__1029750346>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type NoiseLevel__137511242 = {#Buzzing; #Moderate; #Quiet};
+type OldActor__625272489 =
+  {
+    accessControlState : AccessControlState__201339279;
+    locations : Map__230067015<Text, OldLocation__151963712>;
+    userProfiles : Map__230067015<Principal, OldProfile__233775000>
+  };
+type OldLocationType__423999363 = {#Cafe; #CoworkingSpace; #Library};
+type OldLocation__151963712 =
+  {
+    address : ?Text;
+    lat : Float;
+    lng : Float;
+    locationType : OldLocationType__423999363;
+    name : Text;
+    osmNodeId : Text;
+    ratings : [OldRating__92839222]
+  };
+type OldNoiseLevel__97992547 = {#Buzzing; #Moderate; #Quiet};
+type OldProfile__233775000 = {name : Text};
+type OldRating__92839222 =
+  {
+    createdAt : Time__918999370;
+    description : ?Text;
+    editCount : Nat;
+    noiseLevel : OldNoiseLevel__97992547;
+    updatedAt : Time__918999370;
+    userId : Principal;
+    wifiSpeed : OldWifiSpeed__637403249
+  };
+type OldWifiSpeed__637403249 = {#Fast; #Okay; #Slow};
+type Profile__1029750346 = {displayName : Text; organizationName : Text};
+type Profile__469549097 = {displayName : Text; organizationName : Text};
+type Profile__544827657 = {name : Text};
+type Rating__1001775987 =
+  {
+    createdAt : Time__918999370;
+    description : ?Text;
+    editCount : Nat;
+    noiseLevel : NoiseLevel__137511242;
+    updatedAt : Time__918999370;
+    userId : Principal;
+    wifiSpeed : WifiSpeed__510167671
+  };
+type RequestStatus__1004875532 = {#Delivered; #InTransit; #Pending};
+type RequestStatus__211161413 = {#Delivered; #InTransit; #Pending};
+type Time__418528263 = Int__789852381;
+type Time__918999370 = Time__418528263;
+type Timestamp__301639476 = Nat;
+type UserRole__91647283 = {#admin; #guest; #user};
+type WifiSpeed__510167671 = {#Fast; #Okay; #Slow};
+{
+  "20250101_000000_Init" :
+    {} ->
+      {
+        accessControlState : AccessControlState__201339279;
+        locations : Map__230067015<Text, Location__128901279>;
+        userProfiles : Map__230067015<Principal, Profile__544827657>
+      };
+  "20261009_000000" : (old : OldActor__625272489) -> NewActor__705149831
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable hospitals :
+    {
+      var root : Node__204828119<Text, Hospital__115818847>;
+      var size : Nat__227979830
+    };
+  stable requests :
+    {
+      var root : Node__204828119<Nat, BloodRequest__734691164>;
+      var size : Nat__227979830
+    };
+  stable state : {var nextRequestId : Nat};
+  stable userProfiles :
+    {
+      var root : Node__204828119<Principal, Profile__469549097>;
+      var size : Nat__227979830
+    }
+};

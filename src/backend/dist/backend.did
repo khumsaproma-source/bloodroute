@@ -1,0 +1,204 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: HttpRequestResult;
+ };
+type Timestamp = nat;
+type RouteResult = 
+ record {
+   availableUnits: nat;
+   bloodGroup: BloodGroup;
+   destLat: float64;
+   destLng: float64;
+   distanceMeters: nat;
+   durationSeconds: nat;
+   geometry: text;
+   originLat: float64;
+   originLng: float64;
+   stockSufficient: bool;
+   units: nat;
+ };
+type RouteRequest = 
+ record {
+   bloodGroup: BloodGroup;
+   hospitalId: text;
+   originId: text;
+   originLat: float64;
+   originLng: float64;
+   originName: text;
+   units: nat;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type RequestStatus = 
+ variant {
+   Delivered;
+   InTransit;
+   Pending;
+ };
+type Profile = 
+ record {
+   displayName: text;
+   organizationName: text;
+ };
+type HttpRequestResult = 
+ record {
+   body: blob;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type HttpHeader = 
+ record {
+   name: text;
+   value: text;
+ };
+type HospitalInput = 
+ record {
+   address: text;
+   id: text;
+   lat: float64;
+   lng: float64;
+   name: text;
+   stock: vec BloodStock;
+ };
+type Hospital = 
+ record {
+   address: text;
+   id: text;
+   lat: float64;
+   lng: float64;
+   name: text;
+   stock: vec BloodStock;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type BloodStock = 
+ record {
+   bloodGroup: BloodGroup;
+   units: nat;
+ };
+type BloodRequestInput = 
+ record {
+   bloodGroup: BloodGroup;
+   distanceMeters: nat;
+   durationSeconds: nat;
+   geometry: text;
+   hospitalId: text;
+   hospitalName: text;
+   originLat: float64;
+   originLng: float64;
+   originName: text;
+   units: nat;
+ };
+type BloodRequest = 
+ record {
+   bloodGroup: BloodGroup;
+   createdAt: Timestamp;
+   distanceMeters: nat;
+   durationSeconds: nat;
+   geometry: text;
+   hospitalId: text;
+   hospitalName: text;
+   id: nat;
+   originLat: float64;
+   originLng: float64;
+   originName: text;
+   status: RequestStatus;
+   units: nat;
+   updatedAt: Timestamp;
+ };
+type BloodGroup = 
+ variant {
+   ABNeg;
+   ABPos;
+   ANeg;
+   APos;
+   BNeg;
+   BPos;
+   ONeg;
+   OPos;
+ };
+service : {
+  __accessControlState: () -> (reserved) query;
+  __hospitals: () -> (reserved) query;
+  __requests: () -> (reserved) query;
+  __state: () -> (reserved) query;
+  __userProfiles: () -> (reserved) query;
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  computeRoute: (request: RouteRequest) -> (RouteResult);
+  createRequest: (input: BloodRequestInput) -> (nat);
+  deleteHospital: (id: text) -> ();
+  deleteRequest: (id: nat) -> ();
+  execute: (qJson: text) -> (Result) query;
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getHospital: (id: text) -> (opt Hospital) query;
+  getProfile: () -> (opt Profile) query;
+  getRequest: (id: nat) -> (opt BloodRequest) query;
+  isCallerAdmin: () -> (bool) query;
+  listHospitals: () -> (vec Hospital) query;
+  listRequests: () -> (vec BloodRequest) query;
+  schema: () -> (text) query;
+  searchHospitals: (term: text) -> (vec Hospital) query;
+  setProfile: (displayName: text, organizationName: text) -> ();
+  transform: (input: TransformationInput) -> (TransformationOutput) query;
+  updateRequestStatus: (id: nat, status: RequestStatus) -> ();
+  upsertHospital: (input: HospitalInput) -> ();
+}
